@@ -7,10 +7,23 @@
 		</el-breadcrumb>
 		<!-- 表单 -->
 		<div class="form_space">
-		<el-form size="small" label-position="left" :rules="rules" label-width="80px" ref="formData" :model="formData">
-					<el-form-item label="姓名" prop="name" > 
-							<el-col :span="6"><el-input v-model="formData.name"></el-input></el-col>
+		<el-form v-loading="false" size="small" label-position="right" :rules="rules" label-width="100px" ref="formData" :model="formData">
+					<el-form-item label="姓名" prop="name"> 
+							<el-col :span="8"><el-input v-model="formData.name"></el-input></el-col>
 					</el-form-item>
+					<!-- <el-row>
+						<el-col :span="8">
+							<el-form-item label="姓名" prop="name"> 
+									<el-col><el-input v-model="formData.name"></el-input></el-col>
+							</el-form-item>
+						</el-col>
+						<el-col :span="8">
+							<el-form-item label="姓名" prop="name"> 
+									<el-col><el-input v-model="formData.name"></el-input></el-col>
+							</el-form-item>
+						</el-col>
+					</el-row> -->
+
 						<!-- <el-radio-group v-model="formData.sex"> -->
 					<!-- <el-form-item label="性别" prop="sex"> 
 							 <el-radio label="男">男</el-radio>
@@ -127,6 +140,7 @@
 		        this.$refs[formName].validate((valid) => {
 		          if (valid) {
 		            alert('submit!');
+		            
 		          } else {
 		            console.log('error submit!!');
 		            return false;
@@ -136,14 +150,10 @@
 		    resetForm(formName) {
 		        this.$refs[formName].resetFields();
      		}
-		}
+		},
 	}
 </script>
 
-<style scoped lang="less">
-	.form_space{
-	 	background: #ecf5ff8c;
-	    padding: 30px;
-	    margin-top: 20px;
-	}
+<style scoped lang="scss">
+	
 </style>

@@ -16,6 +16,10 @@ Vue.prototype.$ajax = axios
 import Vuex from 'vuex'
 import store from './vuex/store'
 Vue.use(Vuex)
+import '../static/css/global.css' /*引入公共样式*/
+import utils from  './components/util' /*引入公共函数*/
+Vue.prototype.utils = utils
+
 
 Vue.config.productionTip = false
 
@@ -24,9 +28,11 @@ Vue.config.productionTip = false
 axios.interceptors.request.use(function (config) {
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     if(config.method === 'post') {
+      console.log( config.data )
         config.data = qs.stringify( {
             ...config.data
         })
+        console.log( config.data )
     } 
     return config;
   }, function (error) {

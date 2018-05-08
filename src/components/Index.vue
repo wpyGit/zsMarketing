@@ -50,7 +50,6 @@
 </template>
 
 <script>
-	// import { addUser } from '../api/api';
 	export default{
 		data(){
 			return{
@@ -69,23 +68,15 @@
 		    }
 		},
 		mounted(){
-			console.log(this.$router.options)
+
 		},
 		created(){
-	
 
-				// let para = { id: 4 };
-				// 	addUser().then((res) => {
-						
-						
-				// 	}).catch(function(){
-
-				// });
 		}
 	}
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 	.i_index{
 		position: absolute;
 	    top: 0;

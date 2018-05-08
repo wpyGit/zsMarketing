@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-let base = 'http://localhost:8080';
+let base = 'http://localhost:8080/shop';
 
-export const addUser = params => { return axios.get(`${base}/shop/goodsListHasPage.do`, { params: params }); };
+export const addColumn = params => { return axios.post(`${base}/addColumn.do`, { params: params }); };
