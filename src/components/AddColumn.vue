@@ -89,6 +89,7 @@
 								}						
 							}
 					})
+
 		          } else {
 		            console.log('error submit!!');
 		            return false;
@@ -99,7 +100,12 @@
 		    resetForm(formName) {
 		        this.$refs[formName].resetFields();
      		}
-		}
+		},
+		watch:{
+				$route:function(){
+					alert("发送ajax")
+				}
+			}
 	}
 </script>
 

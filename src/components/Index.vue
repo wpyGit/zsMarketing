@@ -129,7 +129,7 @@
 		    top: 60px;
 		    bottom: 0;
 		    width: auto;
-		    padding: 28px;
+		    padding: 20px;
 		    overflow-y: auto;		   
 		    transition: left .3s ease-in-out;
 	    }
