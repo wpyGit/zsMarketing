@@ -48,7 +48,7 @@
                           duration: 2000
                     });
                      sessionStorage.user = "wpy";
-                    this.$router.replace('/productList');
+                    this.$router.replace('/columnList');
                     // this.$store.commit("setUserName","王鹏越");
                     // this.$store.commit('setUserId',1);
             }else{
@@ -87,7 +87,7 @@
     width: 100%;
     height: 100vh;
     background: #DFE9FB;
-    padding-top:160px;
+    padding-top:9%;
     flex: 1;
   }
 </style>

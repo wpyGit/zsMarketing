@@ -1,6 +1,6 @@
 <template>
 	<!-- 头部 -->
-	<el-row class="i_index">
+	<el-row class="i_index" :style="{ background: [this.$store.state.themeColor] }">
 		  <el-col :span="24" class="i_header">
 		  		<div class="grid-content bg-purple">xxx微商平台系统</div>
 		  		<el-dropdown class="user_space">
@@ -8,29 +8,31 @@
 				        超级管理员<i class="el-icon-arrow-down el-icon--right"></i>
 				      </span>
 				      <el-dropdown-menu slot="dropdown">
-					        <el-dropdown-item>个人信息</el-dropdown-item>
-					        <el-dropdown-item>修改密码</el-dropdown-item>
+					        <el-dropdown-item>主题色</el-dropdown-item>
 					        <el-dropdown-item>退出登录</el-dropdown-item>
 				      </el-dropdown-menu>
 			    </el-dropdown>
 		  </el-col>
 		  <!-- 内容区 -->
 		  <!-- <el-col :span="24" class="i_article"> -->
-		  		<div class="left_nav">
+		  		<div class="left_nav" :style="{ background: [this.$store.state.themeColorLight] }">
 			  		<!-- 展开按钮 -->
 					<div class="clooapse_space" @click.prevent="isCollapse = !isCollapse" :class="{open:isCollapse,close:!isCollapse}">
-						<i class="iconfont icon-liebiaozhankai-copy" v-show="!isCollapse"></i>	
-						<i class="iconfont icon-liebiaozhankai" v-show="isCollapse"></i>					
+						<i :style="{ color: [this.$store.state.themeColor] }" class="iconfont icon-liebiaozhankai-copy" v-show="!isCollapse"></i>	
+						<i :style="{ color: [this.$store.state.themeColor] }" class="iconfont icon-liebiaozhankai" v-show="isCollapse"></i>				
 					</div>
 					<!-- 导航 -->
-					<el-menu background-color="#EEF1F6" unique-opened router :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">						    
+					<el-menu :background-color="this.$store.state.themeColorLight" unique-opened router :default-active="$route.path" class="el-menu-vertical-demo" :collapse="isCollapse">						    
 						<template v-for="(item,index) in $router.options.routes" v-if="item.navShow">
 							<el-submenu :index="index+''" v-if="!item.oneLevel">
 							    <template slot="title">
 								      <i class="el-icon-location"></i>
 								      <span slot="title">{{item.navName}}</span>
 							    </template>
-							    <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="child.navShow">
+							    <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="child.navShow && !child.noRoute">
+							        <span slot="title">{{child.navName}}</span>
+							    </el-menu-item>
+							    <el-menu-item v-for="child in item.children" :index="child.path" :key="child.navName" @click="menuSelect('themeColor')" v-if="child.navShow && child.noRoute">
 							        <span slot="title">{{child.navName}}</span>
 							    </el-menu-item>
 						    </el-submenu>
@@ -46,13 +48,21 @@
 						<transition name="fade" mode="out-in"><router-view></router-view></transition>
 				</div>
 		    <!-- </el-col> -->
+		    <!-- 主题色模态框 -->
+		    	<el-dialog title="设置主题色" :visible.sync="themeDialog" width="30%" >
+		    	  <span>设置主题色</span>
+		    	  <my-theme></my-theme>
+		    	</el-dialog>
 	</el-row>
+		
 </template>
 
 <script>
 	export default{
 		data(){
 			return{
+				localTheme:'',
+				themeDialog:false,
  				isCollapse: false,
  				nindex:0,
  				spaceWidthDefault:'all_articalSpace',
@@ -60,12 +70,10 @@
 			}
 		},
 		methods:{
-			handleOpen(key, keyPath) {
-		        console.log(key, keyPath);
-		    },
-		    handleClose(key, keyPath) {
-		        console.log(key, keyPath);
-		    }
+			//非路由菜单点击
+			menuSelect(val){
+				this.themeDialog = true;
+			},
 		},
 		mounted(){
 
@@ -85,7 +93,7 @@
 	    .i_header{
 	    	height: 60px;
 		    line-height: 60px;
-		    background: #20A0FF;
+		    // background: #20A0FF;
 		    padding: 0;
 		    >div{
 		    	float: left;
@@ -101,19 +109,19 @@
 		    top: 60px;
 		    bottom: 0;
 		    overflow-y: auto;
-		    background:#EEF1F6;
+		    // background:#EEF1F6;
 		    &::-webkit-scrollbar {
 		        display: none;
 		    }
 		    .clooapse_space{
 	    	    padding: 6px 0;
-			    background: #f0f9eb;
+			    // background: #f0f9eb;
 			    text-align: center;
 			    cursor:pointer;
 			    border-right: solid 1px #e6e6e6;
 		    }
 		    .open{
-		    	background: #20A0FF;
+		    	// background: #20A0FF;
 		    	color:#fff;
 		    }
 		    .close{

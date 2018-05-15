@@ -20,11 +20,12 @@ import '../static/css/global.css' /*引入公共样式*/
 import utils from  './components/util' /*引入公共函数*/
 Vue.prototype.utils = utils
 
-
 Vue.config.productionTip = false
+//全局组件
+import Theme from './components/Theme.vue'
+Vue.component('my-theme', Theme);
 
 
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded' 
 axios.interceptors.request.use(function (config) {
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     if(config.method === 'post') {

@@ -84,6 +84,20 @@ let router = new Router({
             },
         ]
     },
+    {   //系统设置
+        path:'/index',
+        navShow:true,
+        component: resolve => require(['../components/Index'],resolve),
+        navName:'系统设置',
+        children:[
+            {
+                path:'',
+                navShow:true,
+                noRoute:true,
+                navName:'主题色',
+            },
+        ]
+    },
     {   //404
         path:'/404',
         name:'404',
@@ -102,12 +116,14 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
   //NProgress.start();
-  next()
   if (to.path == '/login') {
     sessionStorage.removeItem('user');
+    next();
   }else if(!sessionStorage.user){
     console.log("无登录用户")
     next({ path: '/login' })
+  }else{
+    next();
   }
   // let user = JSON.parse(sessionStorage.getItem('user'));
   // if (!user && to.path != '/login') {

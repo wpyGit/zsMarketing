@@ -1,20 +1,25 @@
-<template out-in>
-  <div id="app">
-      <transition name="fade" mode="out-in">
-            <router-view></router-view>
-      </transition>          
-  </div>
+<template>
+  <el-color-picker
+    class="theme-picker"
+    popper-class="theme-picker-dropdown"
+    v-model="theme"></el-color-picker>
 </template>
 
 <script>
 const version = require('element-ui/package.json').version // element-ui version from node_modules
 const ORIGINAL_THEME = '#409EFF' // default color
 export default {
-  name: 'App',
-  data(){
-        return{
-          
-        }
+  data() {
+    return {
+      chalk: '', // content of theme-chalk css
+      theme: ORIGINAL_THEME
+    }
+  },
+  watch: {
+    theme(val, oldVal) {
+          localStorage.ThemeColor = val;
+          this.setTheme(val,oldVal)
+    }
   },
   methods: {
     updateStyle(style, oldCluster, newCluster) {
@@ -72,9 +77,6 @@ export default {
       return clusters
     },
 
-
-
-    //
     setTheme(val,oldVal){
         if (typeof val !== 'string') return
         const themeCluster = this.getThemeCluster(val.replace('#', ''))
@@ -90,7 +92,6 @@ export default {
               document.head.appendChild(styleTag)
             }
             styleTag.innerText = newStyle
-            //设置主题色浅色
             this.$store.commit("setThemeColorLight",themeCluster[10]);
             this.$store.commit("setThemeColor",val);
           }
@@ -98,7 +99,7 @@ export default {
         const chalkHandler = getHandler('chalk', 'chalk-style')
         if (!this.chalk) {
           const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
-          this.getCSSString(url, chalkHandler, 'chalk')
+          this.getCSSString(url, chalkHandler, 'chalk') 
         } else {
           chalkHandler()
         }
@@ -112,42 +113,25 @@ export default {
           if (typeof innerText !== 'string') return
           style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
         })
-        setTimeout(function(){
-          document.getElementsByTagName("body")[0].style.visibility="visible";
-        },500)
+        // this.$message({
+        //   message: '换肤成功',
+        //   type: 'success'
+        // })
     }
   },
-  // 这里的换肤功能在ie9及以下会报错
-  mounted(){
-          document.getElementsByTagName("body")[0].style.visibility="hidden";
-            if(localStorage.ThemeColor != null && localStorage.ThemeColor != ""){
-              this.setTheme(localStorage.ThemeColor)
-            }else{
-              localStorage.ThemeColor = '#409EFF'
-              this.setTheme('#409EFF')
-            }
+  created(){
+        if(localStorage.ThemeColor != null && localStorage.ThemeColor != ""){
+            this.theme = localStorage.ThemeColor;
+        }
   }
 }
 </script>
 
 <style>
-  *{
-    margin: 0;
-    padding: 0;
-  }
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    color: #2c3e50;
-  }
-  .fade-enter-active,.fade-leave-active {
-    transition: all .2s ease;
-  }
-
-  .fade-enter,.fade-leave-active {
-    opacity: 0;
-  }
-    .el-table td, .el-table th {
-        padding: 4px 0;
-        min-width: 0;
-    }
+.theme-picker .el-color-picker__trigger {
+  vertical-align: middle;
+}
+.theme-picker-dropdown .el-color-dropdown__link-btn {
+  display: none;
+}
 </style>
