@@ -134,4 +134,10 @@ export default {
 .theme-picker-dropdown .el-color-dropdown__link-btn {
   display: none;
 }
+.theme-picker{
+    width:90%;
+}
+.theme-picker>div{
+    width:100%;
+}
 </style>

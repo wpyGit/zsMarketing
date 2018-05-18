@@ -49,9 +49,10 @@
 				</div>
 		    <!-- </el-col> -->
 		    <!-- 主题色模态框 -->
-		    	<el-dialog title="设置主题色" :visible.sync="themeDialog" width="30%" >
-		    	  <span>设置主题色</span>
-		    	  <my-theme></my-theme>
+		    	<el-dialog title="设置主题色" :visible.sync="themeDialog" width="30%">
+		    		<div style="text-align:center;">
+		    			<my-theme></my-theme>
+		    		</div>
 		    	</el-dialog>
 	</el-row>
 		

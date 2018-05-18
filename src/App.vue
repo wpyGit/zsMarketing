@@ -119,13 +119,12 @@ export default {
   },
   // 这里的换肤功能在ie9及以下会报错
   mounted(){
+          console.log("localStorage.ThemeColor == " + localStorage.ThemeColor)
           document.getElementsByTagName("body")[0].style.visibility="hidden";
-            if(localStorage.ThemeColor != null && localStorage.ThemeColor != ""){
-              this.setTheme(localStorage.ThemeColor)
-            }else{
-              localStorage.ThemeColor = '#409EFF'
-              this.setTheme('#409EFF')
+            if(localStorage.ThemeColor == null || localStorage.ThemeColor == ""){
+                localStorage.ThemeColor = '#409EFF' 
             }
+            this.setTheme(localStorage.ThemeColor)
   }
 }
 </script>

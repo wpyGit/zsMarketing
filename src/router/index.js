@@ -4,8 +4,6 @@ import Login from '../components/Login.vue'
 import Index from '../components/Index.vue'
 import AddProduct from '../components/AddProduct.vue'
 import ProductList from '../components/ProductList.vue'
-import AddWindowTpl from '../components/AddWindowTpl.vue'
-import WindowTplList from '../components/WindowTplList.vue'
 import AddColumn from '../components/AddColumn.vue'
 import ColumnList from '../components/ColumnList.vue'
 import _404 from '../components/_404.vue'
@@ -24,13 +22,13 @@ let router = new Router({
         component: resolve => require(['../components/Index'],resolve),
         navName:'栏目管理',
         children:[
-            {
-                path:'/addColumn',
-                navShow:true,
-                name:'AddColumn',
-                navName:'添加栏目',
-                component: resolve => require(['../components/AddColumn'],resolve)
-            },
+            // {
+            //     path:'/addColumn',
+            //     navShow:true,
+            //     name:'AddColumn',
+            //     navName:'添加栏目',
+            //     component: resolve => require(['../components/AddColumn'],resolve)
+            // },
             {
                 path:'/columnList',
                 navShow:true,
@@ -46,41 +44,19 @@ let router = new Router({
         component: resolve => require(['../components/Index'],resolve),
         navName:'商品管理',
         children:[
-            {
-                path:'/addProduct',
-                navShow:true,
-                name:'AddProduct',
-                navName:'添加商品',
-                component: resolve => require(['../components/AddProduct'],resolve)
-            },
+            // {
+            //     path:'/addProduct',
+            //     navShow:true,
+            //     name:'AddProduct',
+            //     navName:'添加商品',
+            //     component: resolve => require(['../components/AddProduct'],resolve)
+            // },
             {
                 path:'/productList',
                 navShow:true,
                 name:'ProductList',
                 navName:'商品列表',
                 component: resolve => require(['../components/ProductList'],resolve)
-            },
-        ]
-    },
-    {   //专柜管理
-        path:'/index',
-        navShow:true,
-        component: resolve => require(['../components/Index'],resolve),
-        navName:'专柜管理',
-        children:[
-            {
-                path:'/addWindowTpl',
-                navShow:true,
-                name:'AddWindowTpl',
-                navName:'添加橱窗模板',
-                component: resolve => require(['../components/AddWindowTpl'],resolve)
-            },
-            {
-                path:'/windowTplList',
-                navShow:true,
-                name:'WindowTplList',
-                navName:'橱窗模板列表',
-                component: resolve => require(['../components/WindowTplList'],resolve)
             },
         ]
     },
